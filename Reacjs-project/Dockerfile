@@ -1,11 +1,11 @@
-FROM node:16-alpine as BUILD_IMAGE
+FROM node:19-alpine
 
 WORKDIR /var/www/html
 
-COPY package.json .
+COPY package.json /frontend
 
 RUN npm install
 
-COPY . .
+COPY . /frontend
 
 CMD [ "npm", "run", "dev" ]

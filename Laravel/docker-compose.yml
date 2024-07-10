@@ -44,15 +44,6 @@ services:
       - "1025:1025"
       - "8025:8025"
 
-  frontend:
-    build: ./frontend
-    container_name: ads_frontend
-    working_dir: /var/www/html
-    ports:
-      - "3000:3000"
-    networks:
-      - backend_network
-
 networks:
   laravel-exa:
     driver: bridge
