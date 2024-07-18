@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('urls', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('url');
+            $table->text('url');
             $table->string('code')->unique();
+            $table->string('hash')->unique();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

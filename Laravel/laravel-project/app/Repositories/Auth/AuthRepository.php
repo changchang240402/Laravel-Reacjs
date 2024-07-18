@@ -42,11 +42,11 @@ class AuthRepository implements AuthRepositoryInterface
     public function login($token, $refreshToken)
     {
         return [
-            // 'access_token' => $token,
-            // 'refresh_token' => $refreshToken,
-            // 'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL(),
-            // 'user' => auth()->user()
+            'access_token' => $token,
+            'refresh_token' => $refreshToken,
+            'token_type' => 'bearer',
+            // 'expires_in' => auth()->factory()->getTTL(),
+            'user' => auth()->user()
         ];
     }
 

@@ -15,6 +15,7 @@ class Url extends Model
     protected $fillable = [
         'url',
         'code',
+        'hash',
         'user_id',
     ];
 
