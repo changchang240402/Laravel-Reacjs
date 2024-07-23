@@ -44,10 +44,10 @@ function AuthService() {
             if (response.status === 200) {
 
                 Toastify.success("Đăng nhập thành công");
-
                 localStorage.setItem("accessToken", response.data.access_token);
                 localStorage.setItem("refreshToken", response.data.refresh_token);
                 localStorage.setItem("userName", response.data.user.name);
+                navigate('/home');
             }
         } catch (error) {
             if (error.response) {

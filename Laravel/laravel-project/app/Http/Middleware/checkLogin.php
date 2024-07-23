@@ -15,13 +15,12 @@ class checkLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check()) {
-            return $next($request);
-        }
-
-        return response()->json([
-            'success' => false,
-            'message' => 'User is not logged in'
-        ], 401);
+            if (auth()->check()) {
+                return $next($request);
+            }
+            return response()->json([
+                'success' => false,
+                'message' => "Use not login"
+            ], 401);
     }
 }

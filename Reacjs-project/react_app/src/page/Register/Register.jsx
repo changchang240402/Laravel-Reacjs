@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState, useEffect } from 'react';
 import AuthService from "../../services/AuthService";
 import { Link } from "react-router-dom";
-import { Component, Label, LabelError } from "../Components";
+import { Component, Label, LabelError } from "../../components/Components";
 import { faArrowRotateLeft, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 const schema = yup.object({
     name: yup.string()
@@ -33,52 +33,61 @@ const Register = () => {
         resolver: yupResolver(schema),
     });
 
-
+    const {regiter} = AuthService();
     const formSubmit = async (data) => {
         const { email, password, confirm_password, name } = data;
-        setUserData({ ...userData, email, password, confirm_password, name});
+        regiter(email,password,confirm_password,name);
     };
 
     return (
-        <form
-            className="form flex flex-col"
-            onSubmit={handleSubmit(formSubmit)}
-        >
-            <p style={{ fontFamily: 'Lobster, cursive' }} className="text-[#546869] text-center text-2xl mb-12 font-semibold">
-                Chào mừng bạn đã đến với chúng tôi
-            </p>
-            <Component name='email' title='Email' placeholder='abc@gmail.com'
-                register={register("email", { value: userData.email })}
-                error={errors?.email} />
-            <Component name='password' title='Mật khẩu' placeholder='abcd1234'
-                className1='mt-5'
-                register={register("password", { value: userData.password })}
-                error={errors?.password} />
-            <div className="flex flex-col">
-                <Label className='mt-5' name='confirm_password' title='Xác nhận mật khẩu' />
-                <input
-                    className="px-4 py-3 shadow-sm rounded-3xl border-2 focus:outline-none focus:border-[#546869] bg-white"
-                    type="password"
-                    placeholder="abcd1234"
-                    id="confirm_password"
-                    name="confirm_password"
-                    {...register("confirm_password", { value: userData.confirm_password })}
-                />
-                {errors?.confirm_password && (
-                    <LabelError name={confirm_password} error={errors?.confirm_password.message} />
-                )}
+        <div className="flex justify-center items-center min-h-screen z-10">    
+            <div className="rounded-3xl shadow-xl bg-white w-full max-w-lg">
+                <div className="m-10"> 
+                    <form className="form flex flex-col"
+                        onSubmit={handleSubmit(formSubmit)}
+                    >
+                        <p style={{ fontFamily: 'Lobster, cursive' }} className="text-[#6FD7EE] text-center text-5xl mb-6 font-semibold">
+                            Đăng ký
+                        </p>
+                        <Component name='email' title='Email' placeholder='abc@gmail.com'
+                            className1='mt-5'
+                            register={register("email")}
+                            error={errors?.email} />
+                        <Component name='name' title='Tên tài khoản' placeholder='trangchang'
+                            className1='mt-5'
+                            register={register("name")}
+                            error={errors?.name} />
+                        <Component name='password' title='Mật khẩu' placeholder='abcd1234'
+                            className1='mt-5'
+                            register={register("password")}
+                            error={errors?.password} />
+                        <div className="flex flex-col">
+                            <Label className='mt-5' name='confirm_password' title='Xác nhận mật khẩu' />
+                            <input
+                                className="px-4 py-3 shadow-sm rounded-3xl border-2 focus:outline-none focus:border-[#6FD7EE] bg-white"
+                                type="password"
+                                placeholder="abcd1234"
+                                id="confirm_password"
+                                name="confirm_password"
+                                {...register("confirm_password")}
+                            />
+                            {errors?.confirm_password && (
+                                <LabelError name={confirm_password} error={errors?.confirm_password.message} />
+                            )}
+                        </div>
+                        <div className="flex justify-between mt-10 text-center">
+                            <Link to="/" className="bg-[#6FD7EE] rounded-3xl px-6 py-3 font-bold text-white">
+                                <FontAwesomeIcon icon={faArrowRotateLeft} className="mr-3" />
+                                Đăng nhập
+                            </Link>
+                            <button type="submit" className="bg-[#6FD7EE] rounded-3xl px-6 py-3 font-bold text-white">
+                                Đăng ký
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div className="flex justify-between mt-10 text-center">
-                <Link to="/" className="bg-[#65B599] rounded-3xl px-6 py-3 font-bold text-white">
-                    <FontAwesomeIcon icon={faArrowRotateLeft} className="mr-3" />
-                    Đăng nhập
-                </Link>
-                <button type="submit" className="bg-[#65B599] rounded-3xl px-6 py-3 font-bold text-white">
-                    Tiếp theo
-                    <FontAwesomeIcon icon={faArrowRight} className="ml-3" />
-                </button>
-            </div>
-        </form>
+        </div>
     );
 }
 

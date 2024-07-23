@@ -6,13 +6,15 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import Login from './page/Login/Login.jsx';
-import Nav from './page/User/Navigation.jsx';
+import Register from './page/Register/Register.jsx';
+import UserNavigation from './page/User/UserNav.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
 <Provider store={store}>
   <Router>
     <Routes>
       <Route path='' element={<Login/>}/>
-      <Route path='/home' element={<Nav/>}/>
+      <Route path='/register' element={<Register/>}/>
+      <Route path='/home/*' element={<UserNavigation/>}/>
     </Routes>
     <ToastContainer />
   </Router>

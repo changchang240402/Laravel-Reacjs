@@ -31,15 +31,15 @@ const Login = () => {
     };
 
     return (
-        <div className="flex z-10">
-            <div className="rounded-3xl shadow-xl bg-white w-100%">
+        <div className="flex justify-center items-center min-h-screen z-10">    
+            <div className="rounded-3xl shadow-xl bg-white w-full max-w-lg">
                 <div className="m-10">
                     <form
                         className="form flex flex-col"
                         onSubmit={handleSubmit(formSubmit)}
                     >
-                        <p style={{ fontFamily: 'Lobster, cursive' }} className="text-[#546869] text-center text-2xl mb-12 font-semibold">
-                            Chào mừng bạn trở lại
+                        <p style={{ fontFamily: 'Lobster, cursive' }} className="text-[#6FD7EE] text-center text-5xl mb-8 font-semibold">
+                            Đăng nhập
                         </p>
                         <Component name='email' title='Email' placeholder='abc@gmail.com'
                             register={register("email")}
@@ -49,19 +49,14 @@ const Login = () => {
                             register={register("password")}
                             error={errors?.password} />
                         <div className="flex justify-center mt-16 text-center">
-                            <button className="bg-[#72E9C0] rounded-3xl px-6 py-3 font-bold text-white">
+                            <button className="bg-[#6FD7EE] rounded-3xl px-6 py-3 font-bold text-white">
                                 ĐĂNG NHẬP
                             </button>
                         </div>
                         <div className="flex items-center justify-between mt-6">
-                            <div style={{ fontFamily: 'Lobster, cursive' }} className="font-medium text-lg mb-2 text-[#546869]">
+                            <div style={{ fontFamily: 'Lobster, cursive' }} className="font-medium text-lg mb-2 text-[#6FD7EE]">
                                 Bạn chưa có tài khoản ?
                                 <Link to="/register" className="text-gray-900 ml-1">Đăng ký tại đây</Link>
-                            </div>
-                            <div style={{ fontFamily: 'Lobster, cursive' }} className="font-medium text-lg mb-2 text-[#546869]">
-                                <a href="#">
-                                    Quên mật khẩu
-                                </a>
                             </div>
                         </div>
                     </form>
