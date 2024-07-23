@@ -11,7 +11,7 @@ function buildApi() {
         ...config,
         headers: {
             ...config.headers,
-            Authorization: `Bearer ${window.localStorage.getItem("refreshToken")}`,
+            Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
         },
     }));
 

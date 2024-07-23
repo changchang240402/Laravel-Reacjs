@@ -5,8 +5,8 @@ namespace App\Repositories\Auth;
 use App\Repositories\Auth\AuthRepositoryInterface;
 use App\Models\User;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 
 class AuthRepository implements AuthRepositoryInterface
 {
@@ -24,7 +24,11 @@ class AuthRepository implements AuthRepositoryInterface
 
     public function createAccesstoken($validated)
     {
-        return auth()->attempt($validated);
+        if (!$token = JWTAuth::attempt($validated)) {
+            return false;
+        }
+
+        return $token;
     }
 
     public function createRefreshToken($user)

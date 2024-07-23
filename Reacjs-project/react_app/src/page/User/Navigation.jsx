@@ -5,7 +5,7 @@ import { faHome, faLink } from '@fortawesome/free-solid-svg-icons';
 import UserPopup from './UserPopup';
 import '../../index.css'
 const Nav = () => {
-    console.log( `Bearer ${window.localStorage.getItem("refreshToken")}`);
+    console.log(`Bearer ${window.localStorage.getItem("refreshToken")}`);
     return (
         <div className="bg-white top-0 sticky z-10 shadow-lg font-karla">
             <div className="container mx-auto px-4">
@@ -31,10 +31,10 @@ const Nav = () => {
                             data-test="main-products"
                             style={{ fontFamily: 'Lobster, cursive' }}
                         >
-                           <FontAwesomeIcon icon={faLink} className="mr-1 mt-1" color="#546869"/>
+                            <FontAwesomeIcon icon={faLink} className="mr-1 mt-1" color="#546869" />
                             Url
                         </Link>
-                        {/* <UserPopup /> */}
+                        <UserPopup />
                     </div>
                 </div>
             </div>

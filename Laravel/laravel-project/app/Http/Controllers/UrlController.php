@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class UrlController extends Controller
 {
-    
+
     protected  $urlService;
 
     public function __construct(UrlService $urlService)
@@ -20,10 +20,10 @@ class UrlController extends Controller
     public function createUrl(UrlRequest $request)
     {
         try {
-            $validated = $request->validated(); 
-            $hash = hash('sha256',$validated['url']);
-            $validated['user_id'] = 2;
-            $validated['hash'] = $hash.$validated['user_id'];
+            $validated = $request->validated();
+            $hash = hash('sha256', $validated['url']);
+            $validated['user_id'] = auth()->id();
+            $validated['hash'] = $hash . $validated['user_id'];
             $create = $this->urlService->createUrl($validated);
         } catch (\Throwable $th) {
             return response()->json([
@@ -43,7 +43,7 @@ class UrlController extends Controller
     {
         try {
             $data = $this->urlService->findShortLink($code);
-            if (!$data){
+            if (!$data) {
                 $code_data = $this->urlService->findCode($code);
                 return response()->json([
                     'success' => true,
@@ -64,10 +64,11 @@ class UrlController extends Controller
         ], 200);
     }
 
-    public function updateUrl($code){
+    public function updateUrl($code)
+    {
         try {
             $data = $this->urlService->findShortLink($code);
-            if ($data){
+            if ($data) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Còn hạn',
@@ -79,7 +80,7 @@ class UrlController extends Controller
                 return response()->json(['message' => 'No data found'], 422);
             }
             $date = date('YmdHis');
-            $sort_Link = $code_data['url'].$date;
+            $sort_Link = $code_data['url'] . $date;
             $code_data->code = substr(hash('sha256', $sort_Link), 0, 10);
             $code_data->save();
         } catch (\Throwable $th) {
@@ -99,7 +100,7 @@ class UrlController extends Controller
     {
         try {
             $url = $this->urlService->findByUsre($id);
-            if(!$url){
+            if (!$url) {
                 return response()->json([
                     'success' => false,
                     'message' => "không có quyền",
