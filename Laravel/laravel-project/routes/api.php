@@ -26,9 +26,11 @@ Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post("create", [UrlController::class, "createUrl"]);
-    Route::get("find/{code}", [UrlController::class, "findShortLink"]);
+  
     Route::post("update/{code}", [UrlController::class, "updateUrl"]);
     Route::delete("delete/{id}", [UrlController::class, "deleteUrl"]);
     Route::post("logout", [AuthController::class, "logout"])->name('logout');
     Route::get("me", [AuthController::class, "getUserProfile"]);
+    Route::get('list', [UrlController::class, "getUrlByUser"]);
 });
+Route::get("find/{code}", [UrlController::class, "findShortLink"]);

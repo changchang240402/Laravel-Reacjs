@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import urlService from '../../services/UrlService';
 const Home = () => {
     const [longUrl, setLongUrl] = useState('');
     const [shortUrl, setShortUrl] = useState('');
     const [isCopied, setIsCopied] = useState(false);
-
-    const shortenUrl = async (url) => {
-        // Replace this with your URL shortening logic
-        // For demonstration purposes, we'll mock the shortened URL
-        return `https://short.url/${btoa(url).substring(0, 8)}`;
-    };
-
+    const {createUrl} = urlService();
+    const shortenUrl = `http://localhost:3000/${shortUrl}`;
     const handleShorten = async () => {
-        const shortUrl = await shortenUrl(longUrl);
-        setShortUrl(shortUrl);
+        try {
+            const data = await createUrl(longUrl);
+            setShortUrl(data.data);
+            console.log('abc', data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
         setIsCopied(false);
     };
-
+    console.log(shortenUrl)
     const handleCopy = () => {
-        navigator.clipboard.writeText(shortUrl);
+        navigator.clipboard.writeText(shortenUrl);
         setIsCopied(true);
     };
 
@@ -43,7 +44,7 @@ const Home = () => {
                 <div className="mt-4">
                     <input
                         type="text"
-                        value={shortUrl}
+                        value={shortenUrl}
                         readOnly
                         className="border p-2 w-full rounded"
                     />

@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Toastify } from "../toastify/Toastify";
 import api from "../utility/api";
-import * as yup from "yup";
 export const handleUnauthorized = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");

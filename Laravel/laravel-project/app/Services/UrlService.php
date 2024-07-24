@@ -50,7 +50,11 @@ class UrlService
         return $this->urlRepository->findCode($code);
     }
 
-    public function findByUsre($id){
-        return $this->urlRepository->findByUsre($id);
+    public function findByUser($id){
+        return $this->urlRepository->findByUser($id);
+    }
+
+    public function getUrlByUser(){
+        return $this->urlRepository->getUrlHistory();
     }
 }

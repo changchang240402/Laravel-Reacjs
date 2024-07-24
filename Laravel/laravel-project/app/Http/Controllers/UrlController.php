@@ -16,7 +16,7 @@ class UrlController extends Controller
     {
         $this->urlService = $urlService;
     }
-
+    
     public function createUrl(UrlRequest $request)
     {
         try {
@@ -45,12 +45,35 @@ class UrlController extends Controller
             $data = $this->urlService->findShortLink($code);
             if (!$data) {
                 $code_data = $this->urlService->findCode($code);
+                if(!$code_data){
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Không tồn tại',
+                    ], 404);
+                }
                 return response()->json([
                     'success' => true,
                     'message' => 'Hết hạn url',
                     'code' => $code_data
                 ], 403);
             }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'success' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'successfully!',
+            'data' => $data
+        ], 200);
+    }
+
+    public function getUrlByUser()
+    {
+        try {
+            $data = $this->urlService->getUrlByUser();
         } catch (\Throwable $th) {
             return response()->json([
                 'success' => false,
@@ -99,7 +122,7 @@ class UrlController extends Controller
     public function deleteUrl($id)
     {
         try {
-            $url = $this->urlService->findByUsre($id);
+            $url = $this->urlService->findByUser($id);
             if (!$url) {
                 return response()->json([
                     'success' => false,

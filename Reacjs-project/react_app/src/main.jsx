@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import Login from './page/Login/Login.jsx';
 import Register from './page/Register/Register.jsx';
 import UserNavigation from './page/User/UserNav.jsx';
+import ShortUrl from './page/User/ShortUrl.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
 <Provider store={store}>
   <Router>
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Route path='' element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
       <Route path='/home/*' element={<UserNavigation/>}/>
+      <Route path=':code' element={<ShortUrl/>}/>
     </Routes>
     <ToastContainer />
   </Router>

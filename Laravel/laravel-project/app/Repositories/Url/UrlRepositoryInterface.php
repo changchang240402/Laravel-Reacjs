@@ -12,5 +12,5 @@ interface UrlRepositoryInterface extends RepositoryInterface
 
     public function getUrlHistory();
 
-    public function findByUsre($id);
+    public function findByUser($id);
 }

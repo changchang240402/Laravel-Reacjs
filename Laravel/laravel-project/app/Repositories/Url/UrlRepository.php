@@ -32,7 +32,7 @@ class UrlRepository extends BaseRepository implements UrlRepositoryInterface
         return $this->model->where('user_id', '=', $user_id)->get();
     }
 
-    public function findByUsre($id)
+    public function findByUser($id)
     {
         $user_id = auth()->id();
         return $this->model->where('id', '=', $id)->where('user_id', '=', $user_id)->first();
